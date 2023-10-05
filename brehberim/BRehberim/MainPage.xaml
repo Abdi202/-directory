@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BRehberim.MainPage" Title="Kişiler">
+
+    <Grid RowDefinitions="Auto,Auto,*" RowSpacing="10" Margin="15">
+        <Grid ColumnDefinitions="*,*" Grid.Row="0">
+            <Button Text="Ekle" ImageSource="add.png" Clicked="AddCommand"/>
+            <Button Text="Listeyi Kaydet" ImageSource="save.png" Grid.Column="1" Clicked="SaveCommand"/>
+        </Grid>
+        <SearchBar x:Name="searchBar" Grid.Row="1" Margin="0,2" TextChanged="searchBar_TextChanged"/>
+        <CollectionView x:Name="view" SelectionMode="Single" Grid.Row="2">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Border BackgroundColor="Transparent" Margin="0,2" >
+
+                        <Grid RowDefinitions="Auto,Auto,Auto" RowSpacing="2" Margin="0" ColumnSpacing="10"
+                          ColumnDefinitions="Auto,*,Auto">
+
+                            <Image Source="{Binding Image}"  Margin="10"
+                               Grid.Row="0" Grid.Column="0" Grid.RowSpan="3" VerticalOptions="Center"/>
+
+                            <Label Text="{Binding FullName}" VerticalOptions="Center"
+                               Grid.Row="0" Grid.Column="1"/>
+                            <Label Text="{Binding Phone}" VerticalOptions="Center"
+                               Grid.Row="1" Grid.Column="1"/>
+                            <Label Text="{Binding Mail}" VerticalOptions="Center"
+                               Grid.Row="2" Grid.Column="1"/>
+
+                            <Grid Grid.Column="2" Grid.RowSpan="3" RowDefinitions="*,*" Margin="10">
+                                <ImageButton Source="edit.png" Grid.Row="0" Clicked="EditCommand" CommandParameter="{Binding ID}"/>
+                                <ImageButton Source="trash.png" Grid.Row="1"  Clicked="DeleteCommand" CommandParameter="{Binding ID}"/>
+                            </Grid>
+
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+
+</ContentPage>
